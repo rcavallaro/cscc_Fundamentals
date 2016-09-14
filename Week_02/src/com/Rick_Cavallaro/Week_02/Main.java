@@ -1,4 +1,4 @@
-package com.Rick_Cavallaro.Week_2;
+package com.Rick_Cavallaro.Week_02;
 
 /**
  * Created by Rick on 9/6/2016.
