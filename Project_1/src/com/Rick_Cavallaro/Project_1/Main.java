@@ -37,9 +37,22 @@ public class Main {
 
     public static void main(String[] args) {
         String userMenuOption;
+        String userTaskDescription;
+        String userTaskNumber;
 
         userMenuOption = userInputMenuOption();
-        while (userMenuOption <> "0") {
+        while (!userMenuOption.equals("0")) {
+            switch (userMenuOption) {
+                case "1":
+                    userTaskDescription = userInputTaskDescription();
+                    break;
+                case "2":
+                    userTaskNumber = userInputTaskNumber();
+                    break;
+                case "3":
+                    userTaskNumber = userInputTaskNumber();
+                    break;
+            }
             userMenuOption = userInputMenuOption();
         }
 
