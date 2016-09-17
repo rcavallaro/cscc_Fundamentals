@@ -1,4 +1,4 @@
-package com.Rick_Cavallaro.Week_1;
+package com.Rick_Cavallaro.Week_01;
 
 public class Main {
 
