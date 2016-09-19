@@ -56,9 +56,9 @@ public class Main {
                     while (intTaskNumber >= 0 && intTaskNumber < intTaskCount){
                         System.out.println("Shifting item " + (intTaskNumber + 1));
                         strTask[intTaskNumber] = strTask[intTaskNumber + 1];
-                        intTaskCount -= 1;
                         intTaskNumber += 1;
                     }
+                    intTaskCount -= 1;
                     break;
                 case "3":
                     // Update the specified task
