@@ -32,10 +32,6 @@ public class Main {
         return scanner.nextLine();
     }
 
-    private static void userOutput(double celciousTemperature) {
-        System.out.println("Celcious temperature is " + celciousTemperature);
-    }
-
     public static void main(String[] args) {
         String userMenuOption;
         String userTaskDescription;
