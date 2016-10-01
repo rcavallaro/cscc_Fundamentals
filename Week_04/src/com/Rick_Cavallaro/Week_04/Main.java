@@ -4,7 +4,7 @@ package com.Rick_Cavallaro.Week_04;
  * Created by Rick on 9/26/2016.
  */
 import java.util.Map;
-import java.util.TreeSet;
+import java.util.TreeMap;
 import java.util.Scanner;
 
 public class Main {
@@ -28,15 +28,25 @@ public class Main {
         System.out.println("Five day average for " + city + " is " + dblAvgAvgTemp);
     }
 
+    static Map<String, Double[]> assignTemps(String[] cities, Double[] avgTemps) {
+
+        Map<String, Double[]> cityTemps = new TreeMap<>();
+        for (int i = 0; i < cities.length; i++) {
+            Double[] tempArray = {avgTemps[i]};
+            cityTemps.put(cities[i], tempArray);
+        }
+        return cityTemps;
+    }
+
     public static void main(String[] args) {
         String userCityName;
         String userAvgTemps;
         String[] strAvgTemps = {"0.0", "0.0", "0.0", "0.0", "0.0"};
-        TreeSet<String> cities = new TreeSet<>();
+        Map<String, Double[]> cities = new TreeMap<>();
 
         userCityName = userInputCityName();
         while (!userCityName.toUpperCase().equals("END")) {
-            cities.add(userCityName);
+            cities.add(userCityName,strAvgTemps);
             userCityName = userInputCityName();
         }
 
@@ -48,6 +58,8 @@ public class Main {
             int countAvgTemps = strAvgTemps.length;
             for (int i = 0; i < countAvgTemps; i++) {
                 dblAvgTemps[i] = Double.parseDouble(strAvgTemps[i]);
+            }
+
             }
             double dblTotalAvgTemp = 0.0;
             for (double dblAvgTemp : dblAvgTemps) {
@@ -61,4 +73,4 @@ public class Main {
             userOutput(city, dblAvgAvgTemp);
         }
     }
-}
+
