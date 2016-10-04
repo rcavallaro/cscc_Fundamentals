@@ -41,12 +41,13 @@ public class Main {
     public static void main(String[] args) {
         String userCityName;
         String userAvgTemps;
+        Double[] dblAvgTemps = {0.0, 0.0, 0.0, 0.0,0.0};
         String[] strAvgTemps = {"0.0", "0.0", "0.0", "0.0", "0.0"};
         Map<String, Double[]> cities = new TreeMap<>();
 
         userCityName = userInputCityName();
         while (!userCityName.toUpperCase().equals("END")) {
-            cities.add(userCityName,strAvgTemps);
+            cities.assignTemps(userCityName,dblAvgTemps);
             userCityName = userInputCityName();
         }
 
