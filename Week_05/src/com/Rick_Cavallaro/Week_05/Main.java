@@ -9,6 +9,32 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 
+class Contact{
+    String name;
+    String eMail;
+
+    Contact(String name, String eMail){
+        this.name = name;
+        this.eMail = eMail;
+    }
+}
+
+class AddressBook{
+    List<Contact> contacts = new ArrayList<>();
+
+    void add(Contact contact){
+        contacts.add(contact);
+    }
+
+    String searchByName(String name){
+        for (Contact entry: contacts){
+            if (entry.name.equals(name)){
+                return entry.eMail;
+            }
+        }
+        return null;
+    }
+}
 class WeatherData {
     // class fields
     final static String TEMP_UNIT = "F";
@@ -78,12 +104,23 @@ public class Main {
 */
 
     public static void main(String[] args) {
+        AddressBook myAddressBook = new AddressBook();
+        Contact rick = new Contact("Rick", "Rick@GMail.com");
+        Contact bob = new Contact("Bob", "Bob@GMail.com");
+        Contact sue = new Contact("Sue", "Sue@GMail.com");
+
+        myAddressBook.add(rick);
+        myAddressBook.add(bob);
+        myAddressBook.add(sue);
+
+/*
         WeatherData columbus = new WeatherData("Columbus", 70, 65, 10);
 
         System.out.println("City name: " + columbus.cityName);
         System.out.println("Temperature: " + columbus.temperature + WeatherData.TEMP_UNIT);
         System.out.println("Humidity: " + columbus.humidity + WeatherData.HUMIDITY_UNIT);
         System.out.println("Chance of precipition: " + columbus.precipitation + WeatherData.PRECIPITATION_UNIT);
+*/
           /*  String[] cities = {"Cleveland", "New York", "Dallas", "Tampa"};
             int[] temps = {15, 30, 45, 70};
             Map tempMap = assignTemps(cities, temps);
