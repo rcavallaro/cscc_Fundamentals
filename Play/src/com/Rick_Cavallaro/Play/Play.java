@@ -1,6 +1,8 @@
 package com.Rick_Cavallaro.Play;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Set;
+
 import java.util.Scanner;
 /*
  * Created by Rick on 10/4/2016.
@@ -52,6 +54,16 @@ public class Play {
         System.out.println("Values for " + userCityName + ": " + dblAvgTemps[2]);
         System.out.println("Values for " + userCityName + ": " + dblAvgTemps[3]);
         System.out.println("Values for " + userCityName + ": " + dblAvgTemps[4]);
+        System.out.println("");
+
+
+        Set<String> cityNames = cities.keySet();
+
+        for(String cityName: cityNames){
+        //for (String city: set){
+            Double[] cityTemps = cities.get(cityName);
+            System.out.println("Values for " + cityName + ": " + cityTemps[4].toString());
+         }
 
     }
 }

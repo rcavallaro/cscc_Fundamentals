@@ -5,6 +5,8 @@ package com.Rick_Cavallaro.Week_04;
  */
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.Set;
+
 import java.util.Scanner;
 
 public class Main {
@@ -24,7 +26,7 @@ public class Main {
         return input;
     }
 
-    private static void userOutput(String city, double dblAvgAvgTemp){
+    private static void userOutput(String city, double dblAvgAvgTemp) {
         System.out.println("Five day average for " + city + " is " + dblAvgAvgTemp);
     }
 
@@ -41,37 +43,43 @@ public class Main {
     public static void main(String[] args) {
         String userCityName;
         String userAvgTemps;
-        Double[] dblAvgTemps = {0.0, 0.0, 0.0, 0.0,0.0};
+        Double[] dblAvgTemps = {0.0, 0.0, 0.0, 0.0, 0.0};
         String[] strAvgTemps = {"0.0", "0.0", "0.0", "0.0", "0.0"};
         Map<String, Double[]> cities = new TreeMap<>();
 
         userCityName = userInputCityName();
         while (!userCityName.toUpperCase().equals("END")) {
-            cities.assignTemps(userCityName,dblAvgTemps);
+            dblAvgTemps = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0};
+            cities.put(userCityName, dblAvgTemps);
+            //cities.assignTemps(userCityName,dblAvgTemps);
             userCityName = userInputCityName();
         }
 
-        for (String city : cities) {
-            userAvgTemps = userInputAvgTemps(city);
+        Set<String> cityNames = cities.keySet();
+
+        for (String cityName : cityNames) {
+            userAvgTemps = userInputAvgTemps(cityName);
             strAvgTemps = userAvgTemps.split(" ", 5);
 
-            double[] dblAvgTemps = {0.0, 0.0, 0.0, 0.0, 0.0};
+            dblAvgTemps = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0};
             int countAvgTemps = strAvgTemps.length;
             for (int i = 0; i < countAvgTemps; i++) {
                 dblAvgTemps[i] = Double.parseDouble(strAvgTemps[i]);
             }
 
-            }
             double dblTotalAvgTemp = 0.0;
             for (double dblAvgTemp : dblAvgTemps) {
                 dblTotalAvgTemp += dblAvgTemp;
             }
             double dblAvgAvgTemp = 0.0;
+
             if (countAvgTemps > 0) {
                 dblAvgAvgTemp = dblTotalAvgTemp / countAvgTemps;
             }
 
-            userOutput(city, dblAvgAvgTemp);
+            userOutput(cityName, dblAvgAvgTemp);
         }
     }
+}
+
 
