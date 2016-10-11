@@ -30,13 +30,10 @@ public class Main {
         System.out.println("Five day average for " + city + " is " + dblAvgAvgTemp);
     }
 
-    static Map<String, Double[]> assignTemps(String[] cities, Double[] avgTemps) {
+    static Map<String, Double[]> assignTemps(String cityName, Double[] dblTemps) {
 
         Map<String, Double[]> cityTemps = new TreeMap<>();
-        for (int i = 0; i < cities.length; i++) {
-            Double[] tempArray = {avgTemps[i]};
-            cityTemps.put(cities[i], tempArray);
-        }
+        cityTemps.put(cityName, dblTemps);
         return cityTemps;
     }
 
@@ -66,16 +63,20 @@ public class Main {
             for (int i = 0; i < countAvgTemps; i++) {
                 dblAvgTemps[i] = Double.parseDouble(strAvgTemps[i]);
             }
+            cities.put(cityName, dblAvgTemps);
+        }
 
+        for (String cityName : cityNames) {
             double dblTotalAvgTemp = 0.0;
+
+            dblAvgTemps = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0};
+            cities.put(userCityName, dblAvgTemps);
             for (double dblAvgTemp : dblAvgTemps) {
                 dblTotalAvgTemp += dblAvgTemp;
             }
             double dblAvgAvgTemp = 0.0;
 
-            if (countAvgTemps > 0) {
-                dblAvgAvgTemp = dblTotalAvgTemp / countAvgTemps;
-            }
+            dblAvgAvgTemp = dblTotalAvgTemp / 5;
 
             userOutput(cityName, dblAvgAvgTemp);
         }
