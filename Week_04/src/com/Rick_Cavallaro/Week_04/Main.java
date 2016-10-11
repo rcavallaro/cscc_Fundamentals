@@ -70,7 +70,7 @@ public class Main {
             double dblTotalAvgTemp = 0.0;
 
             dblAvgTemps = new Double[]{0.0, 0.0, 0.0, 0.0, 0.0};
-            cities.put(userCityName, dblAvgTemps);
+            dblAvgTemps = cities.get(cityName);
             for (double dblAvgTemp : dblAvgTemps) {
                 dblTotalAvgTemp += dblAvgTemp;
             }
