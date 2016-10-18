@@ -1,12 +1,48 @@
 package com.Rick_Cavallaro.Project_2;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import java.util.Scanner;
 
-/**
+/*
  * Created by Rick on 10/16/2016.
  */
+
+class Task{
+    String number;
+    String name;
+    String description;
+    String priority;
+
+    Task(String number, String name, String description, String priority){
+        this.number =  number;
+        this.name = name;
+        this.description = description;
+        this.priority = priority;
+    }
+}
+
+class Tasks{
+    //TreeSet<Task> tasks = new TreeSet<>();
+    Map<String, Task> tasks = new TreeMap<>();
+    //TreeSet <Integer>treeadd = new TreeSet<Integer>();
+
+    void add(Task task){
+        tasks.put(task.number, task);
+    }
+
+    void remove(Task task){
+        tasks.remove(task.number);
+    }
+
+    Task searchByNumber(String taskNumber){
+        return tasks.get(taskNumber);
+    }
+}
+
 public class Main {
     private static String userInputMenuOption() {
         System.out.println("Please choose an option:\n" +
@@ -26,23 +62,14 @@ public class Main {
         return scanner.nextLine();
     }
 
-/*
-    private static String userInputTaskNumber() {
-        System.out.println("Please enter a task number: ");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-*/
-
     public static void main(String[] args) {
         String userMenuOption;
         String strPrompt =  "";
         String userTaskDescription;
         String userTaskNumber;
-        String[] strTaskName = new String[99];
-        String[] strTaskDescription = new String[99];
-        String[] strTaskPriority = new String[99];
-        int intTaskCount = 0;
+        Map<String, Task> tasks2 = new TreeMap<>();
+        Tasks tasks = new Tasks();
+        Integer intTaskCount = 0;
         int intTaskNumber = 0;
 
         strPrompt =  "";
@@ -51,48 +78,70 @@ public class Main {
             switch (userMenuOption) {
                 case "1":
                     // Add a task to the end of the list
-                    strTaskName[intTaskCount] = userInput("Enter the new task's name: ");
-                    strTaskDescription[intTaskCount] = userInput("Enter the new task's description: ");
-                    strTaskPriority[intTaskCount] = userInput("Enter the new task's description: ");
+                    Task task = new Task("","","","");
+                    task.name = userInput("Enter the new task's name: ");
+                    task.description = userInput("Enter the new task's description: ");
+                    task.priority = userInput("Enter the new task's priority: ");
+                    tasks.add(task);
+                    task.number = intTaskCount.toString();
+                    tasks2.put(task.number, task);
                     intTaskCount += 1;
                     break;
                 case "2":
                     // Remove the specified task
-                    strPrompt =  "Enter the index of a task to remove: ";
-                    userTaskNumber = userInput(strPrompt);
-                    intTaskNumber = Integer.parseInt(userTaskNumber);
-                    while (intTaskNumber >= 0 && intTaskNumber < intTaskCount){
-                        System.out.println("Shifting item " + (intTaskNumber + 1));
-                        strTaskName[intTaskNumber] = strTaskName[intTaskNumber + 1];
-                        strTaskDescription[intTaskNumber] = strTaskDescription[intTaskNumber + 1];
-                        strTaskPriority[intTaskNumber] = strTaskPriority[intTaskNumber + 1];
-                        intTaskNumber += 1;
-                    }
-                    intTaskCount -= 1;
+                    userTaskNumber = userInput("Enter the index of a task to remove: ");
+                    //intTaskNumber = Integer.parseInt(userTaskNumber);
+                    //task = tasks.searchByNumber(userTaskNumber);
+                    //tasks.remove(task);
+                    tasks2.remove(userTaskNumber);
                     break;
                 case "3":
                     // Update the specified task
-                    strPrompt =  "Enter the index of a task to update: ";
-                    userTaskNumber = userInputTaskNumber();
-                    intTaskNumber = Integer.parseInt(userTaskNumber);
-                    if (intTaskNumber >= 0 && intTaskNumber < intTaskCount){
-                        strPrompt =  "";
-                        userTaskDescription = userInput(strPrompt);
-                        strPrompt =  "Enter the new description: ";
-                        strTask[intTaskNumber] = userTaskDescription;
+                    userTaskNumber = userInput("Enter the index of a task to update: ");
+                    task = tasks2.get(userTaskNumber);
+                    //intTaskNumber = Integer.parseInt(userTaskNumber);
+                    //if (intTaskNumber >= 0 && intTaskNumber < intTaskCount) {
+                        task.name = userInput("Enter the task's new name: ");
+                        task.description = userInput("Enter the task's new description: ");
+                        task.priority = userInput("Enter the new task's new priority: ");
                         System.out.println("Task (" + userTaskNumber + ") Updated.");
-                    }
+                    //}
                     break;
                 case "4":
                     // List all known tasks
-                    System.out.println("\nTasks\n");
-                    for (int i = 0; i < intTaskCount; i++){
-                        System.out.println("(" + i + ") " + strTask[i]);
+                    System.out.println("\nAll Tasks\n");
+                    task = new Task("","","","");
+                    for(Map.Entry<String,Task> entry : tasks2.entrySet()) {
+                        String key = entry.getKey();
+                        task = entry.getValue();
+                        System.out.println(
+                                ", Number: " + task.number +
+                                ", Name: " + task.name +
+                                ", Description: " + task.description +
+                                ", Priority: " + task.priority);
                     }
                     System.out.println("\n");
                     break;
+                case "5":
+                    // List all known tasks
+                    String strListTaskPriority = userInput("Enter priority of tasks to list: ");
+                    System.out.println("\nTasks\n");
+                    for(Map.Entry<String,Task> entry : tasks2.entrySet()) {
+                        String key = entry.getKey();
+                        task = entry.getValue();
+                        if (task.priority.equals(strListTaskPriority)){
+                            System.out.println(
+                                    ", Number: " + task.number +
+                                    ", Name: " + task.name +
+                                    ", Description: " + task.description +
+                                    ", Priority: " + task.priority);
+                        }
+                    }
+
+                    System.out.println("\n");
+                    break;
             }
-            strPrompt =  "";
+            strPrompt = "";
             userMenuOption = userInputMenuOption();
         }
     }
