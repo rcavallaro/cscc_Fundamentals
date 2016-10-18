@@ -1,6 +1,8 @@
 package com.Rick_Cavallaro.Project_2;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -90,22 +92,21 @@ public class Main {
                 case "2":
                     // Remove the specified task
                     userTaskNumber = userInput("Enter the index of a task to remove: ");
-                    //intTaskNumber = Integer.parseInt(userTaskNumber);
-                    //task = tasks.searchByNumber(userTaskNumber);
-                    //tasks.remove(task);
                     tasks2.remove(userTaskNumber);
                     break;
                 case "3":
                     // Update the specified task
                     userTaskNumber = userInput("Enter the index of a task to update: ");
                     task = tasks2.get(userTaskNumber);
-                    //intTaskNumber = Integer.parseInt(userTaskNumber);
-                    //if (intTaskNumber >= 0 && intTaskNumber < intTaskCount) {
+                    if (task == null) {
+                        System.out.println("Task number " + userTaskNumber + " was not found");
+                    }
+                    else{
                         task.name = userInput("Enter the task's new name: ");
                         task.description = userInput("Enter the task's new description: ");
                         task.priority = userInput("Enter the new task's new priority: ");
                         System.out.println("Task (" + userTaskNumber + ") Updated.");
-                    //}
+                    }
                     break;
                 case "4":
                     // List all known tasks
