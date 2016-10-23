@@ -5,7 +5,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.TreeSet;
+//import java.util.TreeSet;
 
 import java.util.Scanner;
 
@@ -71,13 +71,13 @@ public class Main {
         String strValidPriorities = "012345";
         System.out.println(strPrompt);
         Scanner scanner = new Scanner(System.in);
-        String priority = "";
+        String priority;
         priority = scanner.nextLine();
         while (priority.length()==0 || (priority.length()==1 && !strValidPriorities.contains(priority))) {
             System.out.println("Priority must be 0 to 5");
             System.out.println(strPrompt);
             priority = scanner.nextLine();
-        } ;
+        }
         return priority;
     }
 
@@ -91,7 +91,6 @@ public class Main {
         Integer intTaskCount = 0;
         int intTaskNumber = 0;
 
-        strPrompt =  "";
         userMenuOption = userInputMenuOption();
         while (!userMenuOption.equals("0")) {
             switch (userMenuOption) {
@@ -128,7 +127,7 @@ public class Main {
                 case "4":
                     // List all known tasks
                     System.out.println("\nAll Tasks\n");
-                    task = new Task("","","","");
+                    //task = new Task("","","","");
                     for(Map.Entry<String,Task> entry : tasks2.entrySet()) {
                         String key = entry.getKey();
                         task = entry.getValue();
@@ -160,7 +159,6 @@ public class Main {
                     System.out.println("\n");
                     break;
             }
-            strPrompt = "";
             userMenuOption = userInputMenuOption();
         }
     }
