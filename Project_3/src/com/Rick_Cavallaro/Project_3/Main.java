@@ -5,7 +5,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Map;
 import java.util.TreeMap;
-//import java.util.TreeSet;
+import java.util.ArrayList;
 
 import java.util.Scanner;
 
@@ -23,10 +23,14 @@ class Task{
     }
 }
 
-class Tasks{
-    //TreeSet<Task> tasks = new TreeSet<>();
-    Map<String, Task> tasksMap = new TreeMap<>();
-    //TreeSet <Integer>treeadd = new TreeSet<Integer>();
+class Tasks implements Iterable<Task>{
+    private Map<String, Task> tasksMap = new TreeMap<>();
+    //private ArrayList<Task> taskMap;
+
+    public Iterator<Task> iterator() {
+        Iterator<Task> task1 = tasksMap.iterator();
+        return task1;
+    }
 
     void put(Task task){
         tasksMap.put(task.number, task);
@@ -126,7 +130,8 @@ public class Main {
                 case "4":
                     // List all known tasks
                     System.out.println("\nAll Tasks\n");
-                     for (task: tasks) {
+
+                    for (task: tasks) {
                         System.out.println(
                                 ", Number: " + task.number +
                                 ", Name: " + task.name +
