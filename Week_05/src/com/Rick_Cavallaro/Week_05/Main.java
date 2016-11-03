@@ -21,6 +21,7 @@ class AddressBook{
     List<Contact> contacts = new ArrayList<>();
 
     void add(Contact contact){
+
         contacts.add(contact);
     }
 
@@ -33,6 +34,7 @@ class AddressBook{
         return null;
     }
 }
+/*
 class WeatherData {
     // class fields
     final static String TEMP_UNIT = "F";
@@ -65,7 +67,7 @@ class WeatherData {
 
     }
 }
-
+*/
 public class Main {
 /*
             static List<String> combine(List<String> firstList, List<String> secondList) {
@@ -110,6 +112,8 @@ public class Main {
         myAddressBook.add(rick);
         myAddressBook.add(bob);
         myAddressBook.add(sue);
+
+        System.out.println("Bob's eMail address is " + myAddressBook.searchByName("Bob"));
 
 /*
         WeatherData columbus = new WeatherData("Columbus", 70, 65, 10);
