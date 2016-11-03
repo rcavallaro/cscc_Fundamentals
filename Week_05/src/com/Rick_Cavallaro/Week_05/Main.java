@@ -4,8 +4,6 @@ package com.Rick_Cavallaro.Week_05;
  * Created by Rick on 9/27/2016.
  */
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 

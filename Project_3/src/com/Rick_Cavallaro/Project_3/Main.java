@@ -1,11 +1,8 @@
 package com.Rick_Cavallaro.Project_3;
 
-import com.sun.org.apache.xpath.internal.SourceTree;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.ArrayList;
+import java.util.Iterator;
 
 import java.util.Scanner;
 
@@ -23,13 +20,15 @@ class Task{
     }
 }
 
-class Tasks implements Iterable<Task>{
+abstract class Tasks implements Iterable<Task>{
     private Map<String, Task> tasksMap = new TreeMap<>();
     //private ArrayList<Task> taskMap;
 
-    public Iterator<Task> iterator() {
-        Iterator<Task> task1 = tasksMap.iterator();
-        return task1;
+    //public Iterator<Task> iterator() {
+    @Override
+    public Iterator<Map.Entry<String, Task>> iterator() {
+        Iterator<Map.Entry<String, Task>> task = tasksMap.entrySet().iterator();   //.iterator();
+        return task;
     }
 
     void put(Task task){
@@ -85,7 +84,7 @@ public class Main {
         String userTaskNumber;
         Tasks tasks = new Tasks();
         Task task = new Task("","","","");
-        Map<String, Task> tasks2 = new TreeMap<>();
+        //Map<String, Task> tasks2 = new TreeMap<>();
         //Tasks tasks = new Tasks();
         Integer intTaskCount = 0;
         int intTaskNumber = 0;
@@ -123,7 +122,7 @@ public class Main {
                         task.name = userInput("Enter the task's new name: ");
                         task.description = userInput("Enter the task's new description: ");
                         task.priority = userInputPriority("Enter the new task's new priority: ");
-                        tasks.put(usertask);
+                        tasks.put(task);
                         System.out.println("Task (" + userTaskNumber + ") Updated.");
                     }
                     break;
