@@ -34,5 +34,8 @@ public class Main {
     public static void main(String[] args){
         Contact rick = new Contact("Rick", "Rick.Cavallaro@cscc.edu");
         rick.display();
+
+        BusinessContact holly = new BusinessContact("Holly", "Holly@cscc.edu", "614 456-7890");
+        holly.display();
     }
 }
