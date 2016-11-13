@@ -1,46 +1,60 @@
 package com.Rick_Cavallaro.Week_08;
 
-class WeatherData {
-    String cityName;
-    int[] temperatures;
+import java.util.ArrayList;
+import java.util.List;
 
-    WeatherData(String cityName, int[] temperatures) {
-        this.cityName = cityName;
-        this.temperatures = temperatures;
+class Contact {
+    private String name;
+    private String eMail;
+
+    public Contact(String name, String eMail) {
+        this.name = name;
+        this.eMail = eMail;
     }
 
-    public void displayAverageTemp() {
-        int numberOfDays = temperatures.length;
+    public void display() {
+        System.out.println("Name: " + name);
+        System.out.println("eMail: " + eMail);
+    }
+}
 
-        int sum = 0;
-        for (int temp: temperatures) {
-            sum += temp;
-        }
+class BusinessContact extends Contact {
+    private String phoneNumber;
 
-        try {
-            int average = sum / numberOfDays;
-        }
-        catch(NumberFormatException e)
-        {
-            System.out.println("Not enough information for " + cityName + ".");
-        }
-        finally {
-            System.out.println("The average temperature in " + cityName + " will be: " + average+ ".");
-        }
-
+    public BusinessContact(String name, String eMail, String phoneNumber) {
+        super(name, eMail);
+        this.phoneNumber = phoneNumber;
     }
 
+    @Override
+    public void display() {
+        super.display();
+        System.out.println("Phone Number: " + phoneNumber);
+    }
+}
+
+class AddressBook {
+    List<Contact> contacts = new ArrayList<>();
+
+    public void add(Contact c) {
+        contacts.add(c);
+    }
+
+    public void display() {
+        for (Contact c: contacts) {
+            c.display();
+        }
+    }
+}
 
 public class Main {
-    public void main(String[] args) {
-        int[] columbusTemps = {60, 70, 65};
-        int[] clevelendTemps = {};
-
-        WeatherData columbus = new WeatherData("Columbus", columbusTemps);
-        columbus.displayAverageTemp();
-
-        WeatherData cleveland = new WeatherData("Cleveland", clevelendTemps);
-        cleveland.displayAverageTemp();
+    public static void main(String[] args) {
+        Contact rick = new Contact("Rick", "Rick@cscc.edu");
+        BusinessContact holly = new BusinessContact("Holly", "Holly@eMail.com", "614 456-7890");
+        AddressBook contacts = new AddressBook();
+        contacts.add(rick);
+        contacts.add(holly);
+        contacts.display();
     }
 }
 
