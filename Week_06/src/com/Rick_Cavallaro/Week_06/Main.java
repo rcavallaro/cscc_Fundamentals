@@ -5,39 +5,62 @@ package com.Rick_Cavallaro.Week_06;
  */
 import java.util.Scanner;
 
-public class Main {
+class UserInput {
     static Scanner scanner = new Scanner(System.in);
 
-    private static int promptInt(String prompt) throws Exception{
+    public int promptInt(String prompt) {
         System.out.println(prompt + ":  ");
         String input = scanner.nextLine();
-        try{
-            int intInput = Integer.parseInt(input);
-        }
-        catch (NumberFormatException e){
-            System.out.println(input + " is not a valid integer.");
-            input = scanner.nextLine();
+
+        int intInput = 0;
+        boolean isInt = false;
+
+        while (!isInt) {
+            try {
+                intInput = Integer.parseInt(input);
+                isInt = true;
+            } catch (NumberFormatException e) {
+                System.out.println(input + " is not a valid integer.");
+                input = scanner.nextLine();
+            }
         }
         return intInput;
     }
 
-    private static int promptDouble(String prompt) throws Exception{
+    public double promptDouble(String prompt) {
         System.out.println(prompt + ":  ");
         String input = scanner.nextLine();
-        try{
-            double dblInput = Double.parseDouble(input);
+
+        double doubleInput = 0;
+        boolean isDouble = false;
+
+        while (!isDouble) {
+            try {
+                doubleInput = Double.parseDouble(input);
+                isDouble = true;
+            } catch (NumberFormatException e) {
+                System.out.println(input + " is not a valid double.");
+                input = scanner.nextLine();
+            }
         }
-        catch (NumberFormatException e){
-            System.out.println(input + " is not a valid double.");
-            input = scanner.nextLine();
-        }
-        return dblInput;
+        return doubleInput;
     }
 
-
-    public static void main(String[] args) throws Exception{
-        int[] values = {1,2,3};
-        int which = promptInt("Enter an integer");
-        System.out.println((values[which]));
+    public String promptString(String prompt) {
+        System.out.println(prompt + ":  ");
+        return scanner.nextLine();
     }
 }
+
+public class Main {
+    public static void main(String[] args) {
+        UserInput input = new UserInput();
+        String aString = input.promptString("Enter a string");
+        System.out.println("The string you entered is " + aString);
+        int anInt = input.promptInt("Enter an integer");
+        System.out.println("The integer you entered is " + anInt);
+        double aDouble = input.promptDouble("Enter a double");
+        System.out.println("The double you entered is " + aDouble);
+    }
+}
+
