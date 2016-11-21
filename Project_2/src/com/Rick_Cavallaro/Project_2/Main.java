@@ -70,7 +70,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String priority;
         priority = scanner.nextLine();
-        while (priority.length()==0 || (priority.length()==1 && !strValidPriorities.contains(priority))) {
+        while (priority.length()==0 ||
+               priority.length() > 1 ||
+              (priority.length()==1 && !strValidPriorities.contains(priority))) {
             System.out.println("Priority must be 0 to 5");
             System.out.println(strPrompt);
             priority = scanner.nextLine();
