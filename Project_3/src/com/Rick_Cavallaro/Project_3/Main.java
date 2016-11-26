@@ -3,6 +3,8 @@ package com.Rick_Cavallaro.Project_3;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.Scanner;
 
@@ -20,15 +22,14 @@ class Task{
     }
 }
 
-abstract class Tasks implements Iterable<Task>{
+class TaskList implements Iterable<Task>{
     private Map<String, Task> tasksMap = new TreeMap<>();
-    //private ArrayList<Task> taskMap;
+    private List<Task> tasks = new ArrayList<Task>();
 
     //public Iterator<Task> iterator() {
     @Override
-    public Iterator<Map.Entry<String, Task>> iterator() {
-        Iterator<Map.Entry<String, Task>> task = tasksMap.entrySet().iterator();   //.iterator();
-        return task;
+    public Iterator<Task> iterator() {
+        return tasks.iterator();
     }
 
     void put(Task task){
