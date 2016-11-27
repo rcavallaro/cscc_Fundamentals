@@ -139,7 +139,7 @@ public class Main {
                     System.out.println("\n");
                     break;
                 case "5":
-                    // List all known tasks
+                    // List tasks withthe specified priority
                     String strListTaskPriority = userInputPriority
                             ("Enter priority of tasks to list: ");
                     System.out.println("\nTasks\n");

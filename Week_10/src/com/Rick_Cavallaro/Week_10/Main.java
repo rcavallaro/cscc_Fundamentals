@@ -1,8 +1,11 @@
 package com.Rick_Cavallaro.Week_10;
 
+import com.sun.jndi.cosnaming.IiopUrl;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Collections;
 
 class Contact implements Comparable<Contact> {
     public String name;
@@ -27,7 +30,7 @@ class Contact implements Comparable<Contact> {
     }
 }
 
-class AddressBook implements Iterable<Contact>{
+class AddressBook implements Iterable<Contact> {
     private List<Contact> contacts = new ArrayList<>();
 
     public void add(Contact o){
@@ -37,6 +40,10 @@ class AddressBook implements Iterable<Contact>{
     @Override
     public Iterator<Contact> iterator(){
         return contacts.iterator();
+    }
+
+    public void sort() {
+        Collections.sort(contacts);
     }
 }
 
@@ -55,19 +62,21 @@ public class Main {
         addressBook.add(arthur);
         addressBook.add(arthur2);
 
+        addressBook.sort();
+
         for (Contact c: addressBook){
             c.display();
         }
-        /*
-        List <Contact> contacts = new ArrayList<>();
-        contacts.add(bob);
-        contacts.add(arthut);
 
-        Collections.sort(contacts);
+//        List <Contact> contacts = new ArrayList<>();
+//        contacts.add(bob);
+//        contacts.add(arthut);
 
-        for(Contact contact: contacts){
-            contact.display();
-        }
-        */
+        //Collections.sort(contacts);
+
+        //for(Contact contact: contacts){
+            //contact.display();
+        //}
+
     }
 }
