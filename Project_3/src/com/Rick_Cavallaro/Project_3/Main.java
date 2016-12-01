@@ -42,12 +42,12 @@ class Task implements Comparable<Task> {
 
 class TaskList implements Iterable<Task>{
     private Map<String, Task> tasksMap = new TreeMap<>();
-    private List<Task> tasks = new ArrayList<Task>();
+    //private List<Task> tasks = new ArrayList<Task>();
 
     //public Iterator<Task> iterator() {
     @Override
     public Iterator<Task> iterator() {
-        return tasks.iterator();
+        return tasksMap.values().iterator();
     }
 
     void put(Task task){
@@ -62,9 +62,9 @@ class TaskList implements Iterable<Task>{
         return tasksMap.get(taskNumber);
     }
 
-    public void sort() {
-        Collections.sort(tasks);
-    }
+    //public void sort() {
+    //    Collections.sort(tasksMap);
+    //}
 
 }
 
