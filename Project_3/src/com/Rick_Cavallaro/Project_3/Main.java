@@ -5,7 +5,9 @@ import java.util.TreeMap;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Arrays;
 
 import java.util.Scanner;
 
@@ -25,7 +27,7 @@ class Task implements Comparable<Task> {
     @Override
     public int compareTo(Task o) {
         if (!priority.equals(o.priority)) {
-            return priority.compareTo(o.priority);
+            return o.priority.compareTo(priority);
         } else {
             return name.compareTo(o.name);
         }
@@ -40,11 +42,9 @@ class Task implements Comparable<Task> {
     }
 }
 
-class TaskList implements Iterable<Task>{
+class TaskList implements Iterable <Task> {
     private Map<String, Task> tasksMap = new TreeMap<>();
-    //private List<Task> tasks = new ArrayList<Task>();
 
-    //public Iterator<Task> iterator() {
     @Override
     public Iterator<Task> iterator() {
         return tasksMap.values().iterator();
@@ -62,10 +62,12 @@ class TaskList implements Iterable<Task>{
         return tasksMap.get(taskNumber);
     }
 
-    //public void sort() {
-    //    Collections.sort(tasksMap);
-    //}
-
+    public List sort() {
+        Collection<Task> tasksCollection = tasksMap.values();
+        List list = new ArrayList(tasksCollection);
+        Collections.sort(list);
+        return list;
+    }
 }
 
 public class Main {
@@ -76,6 +78,7 @@ public class Main {
                 "(3) Update a task.\n" +
                 "(4) List all tasks.\n" +
                 "(5) List all tasks of a certain priority.\n" +
+                "(6) List all tasks sorted by priority descendng then name.\n" +
                 "(0) Exit.\n\n");
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -113,19 +116,28 @@ public class Main {
         Integer intTaskCount = 0;
         int intTaskNumber = 0;
         // Create easy test data
-        Task task0 = new Task("0","Fix leak","Fix leaky bathroom fawcet","4");
-        task0.display();
-        tasks.put(task0);
-        Task task1 = new Task("1","Empty trash","Take out to curb","1");
-        task1.display();
-        tasks.put(task1);
-        Task task2 = new Task("2","Read contract","Read employment contract","5");
-        task2.display();
-        tasks.put(task2);
-        Task task3 = new Task("3","Read lease","Read appartment lease","5");
-        task3.display();
-        tasks.put(task3);
-        intTaskCount = 4;
+        task = new Task("0","Read lease","Read employment contract","5");
+        task.display();
+        tasks.put(task);
+        task = new Task("1","Empty trash","Take out to curb","1");
+        task.display();
+        tasks.put(task);
+        task = new Task("2","Fix leak","Fix leaky bathroom fawcet","4");
+        task.display();
+        tasks.put(task);
+        task = new Task("3","Read contract","Read appartment lease","5");
+        task.display();
+        tasks.put(task);
+        task = new Task("4","Add router","Add separate subnet","5");
+        task.display();
+        tasks.put(task);
+        task = new Task("5","Cover flowers","Too late now","1");
+        task.display();
+        tasks.put(task);
+        task = new Task("6","Dust keyboard","Use comperssed air","4");
+        task.display();
+        tasks.put(task);
+        intTaskCount = 7;
 
         userMenuOption = userInputMenuOption();
         while (!userMenuOption.equals("0")) {
@@ -172,30 +184,31 @@ public class Main {
 
                     for (Task t: tasks) {
                         t.display();
-                        //System.out.println(
-                        //        ", Number: " + task.number +
-                        //       ", Name: " + task.name +
-                        //        ", Description: " + task.description +
-                        //        ", Priority: " + task.priority);
-            }
+                    }
                     System.out.println("\n");
                     break;
                 case "5":
-                    // List all known tasks
+                    // List tasks of a certain priority
                     String strListTaskPriority = userInputPriority
                             ("Enter priority of tasks to list: ");
                     System.out.println("\nTasks\n");
 
-                    //tasks.sort();
-
                     for (Task t: tasks) {
                         if (t.priority.equals(strListTaskPriority)){
-                            System.out.println(
-                                ", Number: " + t.number +
-                                ", Name: " + t.name +
-                                ", Description: " + t.description +
-                                ", Priority: " + t.priority);
+                            t.display();
                         }
+                    }
+
+                    System.out.println("\n");
+                    break;
+                case "6":
+                    // List all tasks sorted by name
+                    System.out.println("\nTasks\n");
+
+                    List<Task> sortedTasks = tasks.sort();
+
+                    for (Task t: sortedTasks) {
+                        t.display();
                     }
 
                     System.out.println("\n");
